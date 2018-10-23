@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.utfpr.pb.tcc.model.Caso;
+import br.edu.utfpr.pb.tcc.model.CasoAtributo;
+import br.edu.utfpr.pb.tcc.model.compositeKey.CasoAtributoId;
+import br.edu.utfpr.pb.tcc.repository.CasoAtributoRepository;
 import br.edu.utfpr.pb.tcc.repository.CasoRepository;
 
 @RestController
@@ -24,6 +27,9 @@ public class CasoController {
 	@Autowired
 	private CasoRepository casoRepository;
 
+	@Autowired
+	private CasoAtributoRepository casoAtributoRepository;
+	
 	@GetMapping(value = { "/", "" })
 	public List<Caso> listar() {
 		return casoRepository.findAll();
@@ -50,5 +56,10 @@ public class CasoController {
 	@ResponseStatus(value = HttpStatus.OK)
 	public void remover(@PathVariable Long id) {
 		casoRepository.delete(id);
+	}
+	
+	@GetMapping(value = "/{id}/atributo/{atributo}")
+	public CasoAtributo buscarAtributo(@PathVariable("id") Long idCaso, @PathVariable("atributo") Long idAtributo) {
+		return casoAtributoRepository.findOne(new CasoAtributoId(idCaso, idAtributo));
 	}
 }

@@ -23,9 +23,7 @@ public class CasoAtributo implements Serializable {
 	private CasoAtributoId id;
 
 	@ManyToOne
-	@JoinColumn(name = "idCaso", referencedColumnName = "id", insertable = false, updatable = false)
 	private Caso caso;
 	@ManyToOne
-	@JoinColumn(name = "idAtributo", referencedColumnName = "id", insertable = false, updatable = false)
 	private Atributo atributo;
 }

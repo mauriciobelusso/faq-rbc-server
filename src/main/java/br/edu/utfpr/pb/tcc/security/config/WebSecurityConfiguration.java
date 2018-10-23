@@ -64,10 +64,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.and()
 			.authorizeRequests()
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-				.antMatchers("/auth/**").permitAll()
-				.antMatchers("/usuario/**").permitAll()
-				.antMatchers("/pessoa/**").permitAll()
-				.antMatchers("/pessoa/**").hasAnyRole("USER,ADMIN")
+				.antMatchers("/**").permitAll()
+//				.antMatchers("/auth/**").permitAll()
+//				.antMatchers("/usuario/**").permitAll()
+//				.antMatchers("/pessoa/**").permitAll()
+//				.antMatchers("/pessoa/**").hasAnyRole("USER,ADMIN")
 				.anyRequest().authenticated();
 		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 	}
