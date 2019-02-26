@@ -2,7 +2,6 @@ package br.edu.utfpr.pb.tcc.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,41 +13,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.utfpr.pb.tcc.model.Similaridade;
-import br.edu.utfpr.pb.tcc.repository.SimilaridadeRepository;
+import br.edu.utfpr.pb.tcc.model.Sinonimo;
+import br.edu.utfpr.pb.tcc.repository.SinonimoRepository;
 
 @RestController
-@RequestMapping("/similaridade")
-public class SimilaridadeController {
+@RequestMapping("/sinonimo")
+public class SinonimoController {
 
-	@Autowired
-	private SimilaridadeRepository similaridadeRepository;
+	private SinonimoRepository sinonimoRepository;
 
 	@GetMapping(value = { "/", "" })
-	public List<Similaridade> listar() {
-		return similaridadeRepository.findAll();
+	public List<Sinonimo> listar() {
+		return sinonimoRepository.findAll();
 	}
 
 	@GetMapping(value = "/{id}")
-	public Similaridade buscar(@PathVariable Long id) {
-		return similaridadeRepository.findOne(id);
+	public Sinonimo buscar(@PathVariable Long id) {
+		return sinonimoRepository.findOne(id);
 	}
 
 	@PostMapping("/")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void inserir(@RequestBody Similaridade similaridade) {
-		similaridadeRepository.save(similaridade);
+	public void inserir(@RequestBody Sinonimo sinonimo) {
+		sinonimoRepository.save(sinonimo);
 	}
 
 	@PutMapping("/")
 	@ResponseStatus(value = HttpStatus.OK)
-	public void atualizar(@RequestBody Similaridade similaridade) {
-		similaridadeRepository.save(similaridade);
+	public void atualizar(@RequestBody Sinonimo sinonimo) {
+		sinonimoRepository.save(sinonimo);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
 	public void remover(@PathVariable Long id) {
-		similaridadeRepository.delete(id);
+		sinonimoRepository.delete(id);
 	}
 }

@@ -14,41 +14,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.utfpr.pb.tcc.model.Atributo;
-import br.edu.utfpr.pb.tcc.repository.AtributoRepository;
+import br.edu.utfpr.pb.tcc.model.Palavra;
+import br.edu.utfpr.pb.tcc.repository.PalavraRepository;
 
 @RestController
-@RequestMapping("/atributo")
-public class AtributoController {
-
+@RequestMapping("/palavra")
+public class PalavraController {
+	
 	@Autowired
-	private AtributoRepository atributoRepository;
+	private PalavraRepository palavraRepository;
 
 	@GetMapping(value = { "/", "" })
-	public List<Atributo> listar() {
-		return atributoRepository.findAll();
+	public List<Palavra> listar() {
+		return palavraRepository.findAll();
 	}
 
 	@GetMapping(value = "/{id}")
-	public Atributo buscar(@PathVariable Long id) {
-		return atributoRepository.findOne(id);
+	public Palavra buscar(@PathVariable Long id) {
+		return palavraRepository.findOne(id);
 	}
 
 	@PostMapping("/")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void inserir(@RequestBody Atributo atributo) {
-		atributoRepository.save(atributo);
+	public void inserir(@RequestBody Palavra palavra) {
+		palavraRepository.save(palavra);
 	}
 
 	@PutMapping("/")
 	@ResponseStatus(value = HttpStatus.OK)
-	public void atualizar(@RequestBody Atributo atributo) {
-		atributoRepository.save(atributo);
+	public void atualizar(@RequestBody Palavra palavra) {
+		palavraRepository.save(palavra);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
 	public void remover(@PathVariable Long id) {
-		atributoRepository.delete(id);
+		palavraRepository.delete(id);
 	}
 }
