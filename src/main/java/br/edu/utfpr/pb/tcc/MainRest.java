@@ -12,5 +12,4 @@ public class MainRest extends SpringBootServletInitializer{
     public static void main(String[] args) {
         SpringApplication.run(MainRest.class, args);
     }  
-    
 }

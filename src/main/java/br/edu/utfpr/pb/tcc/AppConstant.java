@@ -7,5 +7,5 @@ public class AppConstant {
 	public static final Long HOUR_IN_MILLISECOND = MINUTE_IN_MILLISECOND * 60;
 	public static final Long DAY_IN_MILLISECOND = HOUR_IN_MILLISECOND * 24;
 	public static final Long WEEK_IN_MILLISECOND = DAY_IN_MILLISECOND * 7;
-	
+	public static final Double YEAR_IN_MILLISECOND = DAY_IN_MILLISECOND * 365.25;
 }
