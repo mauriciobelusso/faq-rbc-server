@@ -11,7 +11,6 @@ spring:
     username: postgres
     password: masterkey
     driverClassName: org.postgresql.Driver
-
   mvc:
     dispatch-options-request:true    
 server:
