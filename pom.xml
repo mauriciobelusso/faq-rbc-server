@@ -67,6 +67,7 @@
 	</dependencies>
 
 	<build>
+        <finalName>tcc-server</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
