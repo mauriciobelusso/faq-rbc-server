@@ -15,12 +15,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "username" }, name = "uq_username"))	
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -33,10 +36,10 @@ public class Usuario implements UserDetails {
 	@Column(length = 250, nullable = false)
 	private String nome;
 
-	@Column(length = 100, nullable = false, unique = true)
+	@Column(length = 100, nullable = false)
 	private String username;
 
-	@Column(length = 1024, nullable = false)
+	@Column(length = 1024, nullable = false, unique = true)
 	private String password;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
