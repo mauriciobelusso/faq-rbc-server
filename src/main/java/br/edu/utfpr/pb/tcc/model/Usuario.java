@@ -23,7 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "username" }, name = "uq_username"))	
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "username" }, name = "uk_username"))	
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
