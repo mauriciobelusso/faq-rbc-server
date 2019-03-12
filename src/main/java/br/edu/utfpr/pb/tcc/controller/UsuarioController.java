@@ -34,7 +34,7 @@ public class UsuarioController {
 		return usuarioRepository.findOne(id);
 	}
 
-	@PostMapping("/")
+	@PostMapping("/save")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void inserir(@RequestBody Usuario usuario) {
 		usuarioRepository.save(usuario);
