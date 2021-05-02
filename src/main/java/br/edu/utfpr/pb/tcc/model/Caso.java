@@ -1,7 +1,6 @@
 package br.edu.utfpr.pb.tcc.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Caso implements Serializable {
@@ -46,7 +44,7 @@ public class Caso implements Serializable {
 		this.atributos.add(atributo);
 	}
 	
-	public Atributo getAtributo(String descricao) throws Exception {
+	public Atributo getAtributo(String descricao) {
 		List<Atributo> atributos =
 			this.atributos
 					.stream()
@@ -54,7 +52,7 @@ public class Caso implements Serializable {
 					.collect(Collectors.toList());
 		
 		if(atributos.isEmpty()) {
-			throw new Exception("Atributo não encontrado");
+			return new Atributo();
 		}
 		
 		return atributos.get(0);

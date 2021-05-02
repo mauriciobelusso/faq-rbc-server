@@ -7,6 +7,20 @@ public class Atributo {
 	private Double pesoMaximo;
 	private Double pesoMinimo;
 	
+	public Atributo() {
+		this.descricao = "";
+		this.peso = 0D;
+		this.pesoMaximo = 0D;
+		this.pesoMinimo = 0D;
+	}
+	
+	public Atributo(String descricao, Double peso, Double pesoMaximo, Double pesoMinimo) {
+		this.descricao = descricao;
+		this.peso = peso;
+		this.pesoMaximo = pesoMaximo;
+		this.pesoMinimo = pesoMinimo;
+	}
+	
 	public Double getPesoMaximo() {
 		return pesoMaximo;
 	}

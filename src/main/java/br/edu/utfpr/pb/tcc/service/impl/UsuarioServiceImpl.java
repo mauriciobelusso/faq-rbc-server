@@ -1,6 +1,7 @@
-package br.edu.utfpr.pb.tcc.service;
+package br.edu.utfpr.pb.tcc.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,15 +11,10 @@ import br.edu.utfpr.pb.tcc.model.Usuario;
 import br.edu.utfpr.pb.tcc.repository.UsuarioRepository;
 
 @Service
-public class UsuarioService implements UserDetailsService{
+public class UsuarioServiceImpl extends CrudServiceImpl<Usuario, Long> implements UserDetailsService{
 
-	private UsuarioRepository usuarioRepository;
-	
 	@Autowired
-	public UsuarioService(UsuarioRepository usuarioRepository) {
-		super();
-		this.usuarioRepository = usuarioRepository;
-	}
+	private UsuarioRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -27,5 +23,10 @@ public class UsuarioService implements UserDetailsService{
 			throw new UsernameNotFoundException("Usuário não encontrado!");
 		}
 		return usuario;
+	}
+
+	@Override
+	protected JpaRepository<Usuario, Long> getRepository() {
+		return usuarioRepository;
 	}
 }

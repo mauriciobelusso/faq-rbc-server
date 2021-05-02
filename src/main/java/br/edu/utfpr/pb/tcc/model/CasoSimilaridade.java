@@ -1,7 +1,6 @@
 package br.edu.utfpr.pb.tcc.model;
 
 import java.io.Serializable;
-import java.util.Set;
 
 public class CasoSimilaridade implements Serializable {
 

@@ -10,26 +10,32 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.utfpr.pb.tcc.model.Usuario;
-import br.edu.utfpr.pb.tcc.repository.UsuarioRepository;
+import br.edu.utfpr.pb.tcc.service.CrudService;
+import br.edu.utfpr.pb.tcc.service.impl.UsuarioServiceImpl;
 
 @RestController
 @RequestMapping("/usuario")
-public class UsuarioController {
+public class UsuarioController extends CrudController<Usuario, Long> {
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UsuarioServiceImpl usuarioService;
 
 	@PostMapping("/")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void inserir(@RequestBody Usuario usuario) {
 		usuario.setPassword(usuario.getEncodedPassword(usuario.getPassword()));
-		usuarioRepository.save(usuario);
+		usuarioService.save(usuario);
 	}
 
 	@PutMapping("/")
 	@ResponseStatus(value = HttpStatus.OK)
 	public void atualizar(@RequestBody Usuario usuario) {
 		usuario.setPassword(usuario.getEncodedPassword(usuario.getPassword()));
-		usuarioRepository.save(usuario);
+		usuarioService.save(usuario);
+	}
+
+	@Override
+	protected CrudService<Usuario, Long> getService() {
+		return usuarioService;
 	}
 }
