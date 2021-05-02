@@ -2,7 +2,9 @@ package br.edu.utfpr.pb.tcc.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Caso implements Serializable {
@@ -22,36 +25,39 @@ public class Caso implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(length = 4000)
-	private String descricao;
+	private String titulo;
 	@Column(length = 4000)
-	private String solucao;
+	private String conteudo;
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Set<Palavra> palavras;
+	private Set<Atributo> atributos;
 
 	public Caso() {
 	}
 	
-	public Caso(Long id, String descricao, String solucao, Set<Palavra> palavras) {
+	public Caso(Long id, String titulo, String conteudo, Set<Atributo> atributos) {
 		super();
 		this.id = id;
-		this.descricao = descricao;
-		this.solucao = solucao;
-		this.palavras = palavras;
-	}
-
-	public void addPalavra(Palavra palavra) {
-		if (this.palavras == null) {
-			this.palavras = new HashSet<>();
-		}
-		this.palavras.add(palavra);
+		this.titulo = titulo;
+		this.conteudo = conteudo;
+		this.atributos = atributos;
 	}
 	
-	public Set<Palavra> getPalavras() {
-		return palavras;
+	public void addAtributo(Atributo atributo) {
+		this.atributos.add(atributo);
 	}
-
-	public void setPalavras(Set<Palavra> palavras) {
-		this.palavras = palavras;
+	
+	public Atributo getAtributo(String descricao) throws Exception {
+		List<Atributo> atributos =
+			this.atributos
+					.stream()
+					.filter(filter -> filter.getDescricao().equalsIgnoreCase(descricao))
+					.collect(Collectors.toList());
+		
+		if(atributos.isEmpty()) {
+			throw new Exception("Atributo não encontrado");
+		}
+		
+		return atributos.get(0);
 	}
 
 	public Long getId() {
@@ -62,20 +68,28 @@ public class Caso implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
-	public String getSolucao() {
-		return solucao;
+	public String getConteudo() {
+		return conteudo;
 	}
 
-	public void setSolucao(String solucao) {
-		this.solucao = solucao;
+	public void setConteudo(String conteudo) {
+		this.conteudo = conteudo;
+	}
+
+	public Set<Atributo> getAtributos() {
+		return atributos;
+	}
+
+	public void setAtributos(Set<Atributo> atributos) {
+		this.atributos = atributos;
 	}
 
 	@Override
