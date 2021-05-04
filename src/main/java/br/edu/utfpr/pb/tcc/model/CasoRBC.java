@@ -42,30 +42,24 @@ public class CasoRBC {
 	private Double somaSimilaridade;
 	private CasoSimilaridade similaridade(Caso novoCaso, Caso caso) {
         somaSimilaridade = 0D;
-        CasoAtributoPeso peso = new CasoAtributoPeso();
         
-        novoCaso.getAtributos().forEach(atributo -> {
-        	Atributo atributoCaso = caso.getAtributo(atributo.getDescricao());
+        caso.getAtributos().forEach(atributo -> {
+        	Atributo atributoNovoCaso = novoCaso.getAtributo(atributo.getDescricao());
         	
-        	if (atributoCaso.getPeso() > 0) {
-	        	peso.addAtributo(
-	        			new Atributo(
-	        					atributoCaso.getDescricao(),
-	        					atributoCaso.getPeso(),
-	        					10D,
-	        					0D
-	        			)
-	        		);
-	
+        	if (!atributoNovoCaso.getDescricao().isEmpty()) {	
 		        somaSimilaridade +=
 		        		similaridadeNumerica(
-		        				atributoCaso.getPeso(),
-	        					atributoCaso.getPeso(),
+		        				atributo.getPeso(),
+		        				atributo.getPeso(),
 		        				10D,
 		        				0D
-		        		);
+		        		) * atributo.getPeso();
         	}
     	});
+
+        CasoAtributoPeso peso = new CasoAtributoPeso();
+        
+        peso.setAtributos(caso.getAtributos());
 
         if (peso.getTotal() > 0) {
             return new CasoSimilaridade(caso, somaSimilaridade / peso.getTotal());	
