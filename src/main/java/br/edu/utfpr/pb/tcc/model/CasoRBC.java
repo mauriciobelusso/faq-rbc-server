@@ -39,6 +39,10 @@ public class CasoRBC {
 		}
     }
 	
+	private Double similaridadeSimbolos(String a1, String a2) {
+		return (a1.equalsIgnoreCase(a2) ? 1D : 0D);
+	}
+	
 	private Double somaSimilaridade;
 	private CasoSimilaridade similaridade(Caso novoCaso, Caso caso) {
         somaSimilaridade = 0D;
@@ -46,14 +50,15 @@ public class CasoRBC {
         caso.getAtributos().forEach(atributo -> {
         	Atributo atributoNovoCaso = novoCaso.getAtributo(atributo.getDescricao());
         	
-        	if (!atributoNovoCaso.getDescricao().isEmpty()) {	
-		        somaSimilaridade +=
-		        		similaridadeNumerica(
-		        				atributo.getPeso(),
-		        				atributo.getPeso(),
-		        				10D,
-		        				0D
-		        		) * atributo.getPeso();
+        	if (!atributoNovoCaso.getDescricao().isEmpty()) {
+        		somaSimilaridade += similaridadeSimbolos(atributoNovoCaso.getDescricao(), atributo.getDescricao()) * atributo.getPeso();
+//		        somaSimilaridade +=
+//		        		similaridadeNumerica(
+//		        				atributo.getPeso(),
+//		        				atributo.getPeso(),
+//		        				10D,
+//		        				0D
+//		        		) * atributo.getPeso();
         	}
     	});
 
