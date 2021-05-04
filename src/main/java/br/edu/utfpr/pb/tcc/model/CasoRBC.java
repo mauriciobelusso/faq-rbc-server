@@ -1,5 +1,6 @@
 package br.edu.utfpr.pb.tcc.model;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,18 +46,27 @@ public class CasoRBC {
 //		}
 //    }
 	
+	private String removerAcentos(String a1) {
+		return Normalizer.normalize(a1, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+	}
+	
 	private Double similaridadeSimbolos(String a1, String a2) {
-		return (a1.equalsIgnoreCase(a2) ? 1D : 0D);
+		return (removerAcentos(a1).equalsIgnoreCase(removerAcentos(a2)) ? 1D : 0D);
 	}
 	
 	private CasoSimilaridade similaridade(Caso novoCaso, Caso caso) {        
 		SomaSimilaridade somaSimilaridade = new SomaSimilaridade();
-        
+		
         caso.getAtributos().forEach(atributo -> {
         	Atributo atributoNovoCaso = novoCaso.getAtributo(atributo.getDescricao());
         	
         	if (!atributoNovoCaso.getDescricao().isEmpty()) {
-        		somaSimilaridade.add(similaridadeSimbolos(atributoNovoCaso.getDescricao(), atributo.getDescricao()) * atributo.getPeso());
+        		somaSimilaridade.add(
+        				similaridadeSimbolos(
+        						atributoNovoCaso.getDescricao(), 
+        						atributo.getDescricao()
+        						) * atributo.getPeso()
+        				);
 //		        somaSimilaridade +=
 //		        		similaridadeNumerica(
 //		        				atributo.getPeso(),
