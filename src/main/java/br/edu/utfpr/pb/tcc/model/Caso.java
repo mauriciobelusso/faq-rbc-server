@@ -1,6 +1,7 @@
 package br.edu.utfpr.pb.tcc.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,6 +31,7 @@ public class Caso implements Serializable {
 	private Set<Atributo> atributos;
 
 	public Caso() {
+		this.atributos = new HashSet<>();
 	}
 	
 	public Caso(Long id, String titulo, String conteudo, Set<Atributo> atributos) {
