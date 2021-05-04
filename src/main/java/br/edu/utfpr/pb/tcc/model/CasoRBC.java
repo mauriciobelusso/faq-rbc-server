@@ -1,14 +1,16 @@
 package br.edu.utfpr.pb.tcc.model;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import br.edu.utfpr.pb.tcc.utils.StringUtils;
 
 public class CasoRBC {
 	
 	private List<Caso> casos;
     private List<CasoSimilaridade> casosSimilares = new ArrayList<>();
+    private StringUtils stringUtils = new StringUtils(); 
 	
 	public void processar(List<Caso> casos, Caso novoCaso) {
 		this.casos = casos;
@@ -38,42 +40,26 @@ public class CasoRBC {
         );
 	}
 	
-//	private Double similaridadeNumerica(Double a1, Double a2, Double max, Double min) {
-//		if (max-min != 0D) {
-//	        return (1.0 - (Math.abs(a2 - a1) / (max - min)));			
-//		} else {
-//			return 0D;
-//		}
-//    }
-	
-	private String removerAcentos(String a1) {
-		return Normalizer.normalize(a1, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-	}
-	
-	private Double similaridadeSimbolos(String a1, String a2) {
-		return (removerAcentos(a1).equalsIgnoreCase(removerAcentos(a2)) ? 1D : 0D);
-	}
-	
 	private CasoSimilaridade similaridade(Caso novoCaso, Caso caso) {        
 		SomaSimilaridade somaSimilaridade = new SomaSimilaridade();
 		
         caso.getAtributos().forEach(atributo -> {
-        	Atributo atributoNovoCaso = novoCaso.getAtributo(atributo.getDescricao());
-        	
-        	if (!atributoNovoCaso.getDescricao().isEmpty()) {
-        		somaSimilaridade.add(
-        				similaridadeSimbolos(
-        						atributoNovoCaso.getDescricao(), 
-        						atributo.getDescricao()
-        						) * atributo.getPeso()
-        				);
-//		        somaSimilaridade +=
-//		        		similaridadeNumerica(
-//		        				atributo.getPeso(),
-//		        				atributo.getPeso(),
-//		        				10D,
-//		        				0D
-//		        		) * atributo.getPeso();
+        	if (novoCaso
+        			.getAtributos()
+        			.stream()
+        			.anyMatch(a -> 
+        				stringUtils
+        				.removerAcentos(
+        						a.getDescricao()
+        						)
+        				.equalsIgnoreCase(
+        						stringUtils.removerAcentos(
+        								atributo.getDescricao()
+        								)
+        						)
+        				)
+        			) {
+        		somaSimilaridade.add(atributo.getPeso());
         	}
     	});
 
