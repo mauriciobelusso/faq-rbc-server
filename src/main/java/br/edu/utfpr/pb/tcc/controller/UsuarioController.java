@@ -19,16 +19,16 @@ public class UsuarioController extends CrudController<Usuario, Long> {
 	@Autowired
 	private UsuarioServiceImpl usuarioService;
 
-	@PostMapping("/")
+	@Override
+	protected CrudService<Usuario, Long> getService() {
+		return usuarioService;
+	}
+
+	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@Override
 	public Usuario save(@RequestBody Usuario usuario) {
 		usuario.setPassword(usuario.getEncodedPassword(usuario.getPassword()));
 		return getService().save(usuario);
-	}
-
-	@Override
-	protected CrudService<Usuario, Long> getService() {
-		return usuarioService;
 	}
 }

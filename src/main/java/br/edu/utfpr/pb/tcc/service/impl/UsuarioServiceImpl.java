@@ -9,20 +9,19 @@ import org.springframework.stereotype.Service;
 
 import br.edu.utfpr.pb.tcc.model.Usuario;
 import br.edu.utfpr.pb.tcc.repository.UsuarioRepository;
+import br.edu.utfpr.pb.tcc.service.UsuarioService;
 
 @Service
-public class UsuarioServiceImpl extends CrudServiceImpl<Usuario, Long> implements UserDetailsService{
+public class UsuarioServiceImpl extends CrudServiceImpl<Usuario, Long> implements UsuarioService, UserDetailsService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = usuarioRepository.findByUsername(username);
-		if(usuario == null) {
-			throw new UsernameNotFoundException("Usuário não encontrado!");
-		}
-		return usuario;
+		return usuarioRepository.findByUsername(username).orElseThrow(
+				 () -> new UsernameNotFoundException("Usuário não encontrado!")
+			   );
 	}
 
 	@Override

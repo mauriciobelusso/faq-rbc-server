@@ -18,7 +18,6 @@ public class CasoController extends CrudController<Caso, Long>{
 	@Autowired
 	private CasoService casoService;
 	
-
 	@Override
 	protected CasoService getService() {
 		return casoService;

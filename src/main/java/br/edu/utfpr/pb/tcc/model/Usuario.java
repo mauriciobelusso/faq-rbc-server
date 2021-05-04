@@ -73,9 +73,9 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> auto = new ArrayList<>();
-		auto.addAll(this.permissoes);
-		return auto;
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.addAll(this.permissoes);
+		return authorities;
 	}
 
 	@Override
