@@ -18,6 +18,7 @@ public class Atributo implements Serializable {
 	private Long id;
 	@Column(name = "descricao", length = 50)
 	private String descricao;
+	
 	private Double peso;
 	private Double pesoMaximo;
 	private Double pesoMinimo;

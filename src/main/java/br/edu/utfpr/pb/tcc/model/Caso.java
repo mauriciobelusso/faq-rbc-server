@@ -1,7 +1,6 @@
 package br.edu.utfpr.pb.tcc.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,11 +8,10 @@ import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Caso implements Serializable {
@@ -27,11 +25,10 @@ public class Caso implements Serializable {
 	private String titulo;
 	@Column(length = 4000)
 	private String conteudo;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Atributo> atributos;
 
 	public Caso() {
-		this.atributos = new HashSet<>();
 	}
 	
 	public Caso(Long id, String titulo, String conteudo, Set<Atributo> atributos) {
