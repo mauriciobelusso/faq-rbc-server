@@ -82,7 +82,7 @@ public class CasoRBC {
 		return casosSimilares;
 	}
 	
-	class SomaSimilaridade {
+	private class SomaSimilaridade {
 		private Double soma = 0D;
 		
 		public void add(Double value) {
