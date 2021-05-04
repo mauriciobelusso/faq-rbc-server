@@ -2,11 +2,13 @@ package br.edu.utfpr.pb.tcc.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
 
 import br.edu.utfpr.pb.tcc.model.Permissao;
 import br.edu.utfpr.pb.tcc.repository.PermissaoRepository;
 import br.edu.utfpr.pb.tcc.service.PermissaoService;
 
+@Service
 public class PermissaoServiceImpl extends CrudServiceImpl<Permissao, Long> implements PermissaoService {
 
 	@Autowired

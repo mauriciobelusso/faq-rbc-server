@@ -39,7 +39,7 @@ public class Usuario implements UserDetails {
 	@Column(length = 100, nullable = false)
 	private String username;
 
-	@Column(length = 1024, nullable = false, unique = true)
+	@Column(length = 1024, nullable = false)
 	private String password;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
