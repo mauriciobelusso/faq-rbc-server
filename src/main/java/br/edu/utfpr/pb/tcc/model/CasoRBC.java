@@ -15,11 +15,11 @@ public class CasoRBC {
         List<CasoSimilaridade> casosSimilares = new ArrayList<>();
                 
         this.casos
-        	.stream()
-	    	.sorted(
-	    			(caso1, caso2) -> 
-	    				caso1.getId() >= caso2.getId() ? 1 : -1
-	    	)
+//        	.stream()
+//	    	.sorted(
+//	    			(caso1, caso2) -> 
+//	    				caso1.getId() >= caso2.getId() ? 1 : -1
+//	    	)
         	.forEach(
         		caso -> 
         		casosSimilares.add(
