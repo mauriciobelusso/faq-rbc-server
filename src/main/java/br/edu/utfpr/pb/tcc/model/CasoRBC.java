@@ -17,11 +17,6 @@ public class CasoRBC {
         List<CasoSimilaridade> casosSimilares = new ArrayList<>();
                 
         this.casos
-//        	.stream()
-//	    	.sorted(
-//	    			(caso1, caso2) -> 
-//	    				caso1.getId() >= caso2.getId() ? 1 : -1
-//	    	)
         	.forEach(
         		caso -> 
         		casosSimilares.add(
@@ -36,6 +31,7 @@ public class CasoRBC {
 	        			(caso1, caso2) -> 
 	        				caso1.getSimilaridade() >= caso2.getSimilaridade() ? -1 : 1
 	        	)
+	        	.filter(caso -> caso.getSimilaridade() > 0)
 	        	.collect(Collectors.toList())
         );
 	}
