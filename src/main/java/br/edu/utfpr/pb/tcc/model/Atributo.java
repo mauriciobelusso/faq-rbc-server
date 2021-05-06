@@ -37,6 +37,12 @@ public class Atributo implements Serializable {
 		this.pesoMinimo = pesoMinimo;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public Double getPesoMaximo() {
 		return pesoMaximo;
 	}
@@ -62,5 +68,8 @@ public class Atributo implements Serializable {
 		this.peso = peso;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "[Atributo="+id+"]";
+	}
 }
