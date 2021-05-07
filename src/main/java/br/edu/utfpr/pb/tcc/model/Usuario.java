@@ -3,7 +3,6 @@ package br.edu.utfpr.pb.tcc.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -47,21 +46,25 @@ public class Usuario implements UserDetails {
 
 	private Date lastPasswordReset;
 
+	public Usuario() {
+		super();
+	}
+	
 	public Usuario(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
 	}
 
-	public Usuario() {
+	public Usuario(Long id, String nome, String username, String password, Set<Permissao> permissoes,
+			Date lastPasswordReset) {
 		super();
-	}
-
-	public void addPermissao(Permissao permissao) {
-		if (this.permissoes == null) {
-			this.permissoes = new HashSet<>();
-		}
-		this.permissoes.add(permissao);
+		this.id = id;
+		this.nome = nome;
+		this.username = username;
+		this.password = password;
+		this.permissoes = permissoes;
+		this.lastPasswordReset = lastPasswordReset;
 	}
 
 	public String getEncodedPassword(String pass) {
@@ -86,17 +89,6 @@ public class Usuario implements UserDetails {
 	@Override
 	public String getUsername() {
 		return this.username;
-	}
-
-	public Usuario(Long id, String nome, String username, String password, Set<Permissao> permissoes,
-			Date lastPasswordReset) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.username = username;
-		this.password = password;
-		this.permissoes = permissoes;
-		this.lastPasswordReset = lastPasswordReset;
 	}
 
 	public Long getId() {
